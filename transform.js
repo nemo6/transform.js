@@ -1,3 +1,6 @@
+let a_url  = x => `<a href="${x}">${short(63)(x)}</a>`
+let a_span = x => `<span title="${x}">${short(63)(x)}</span>`
+
 // transform tuple/arr to html table
 
 function transform(m){
