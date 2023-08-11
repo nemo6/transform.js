@@ -105,3 +105,64 @@ for ( let x of y ){
 content += "</table>"
 return content
 }
+
+function btime(x){
+	/* const dayjs = require("C:/Users/Miguel/AppData/Roaming/npm/node_modules/dayjs")
+	require("C:/Users/Miguel/AppData/Roaming/npm/node_modules/dayjs/locale/fr")
+	dayjs.locale("fr") */
+	return dayjs(Math.trunc(x/1000+Date.UTC(1601,0,1))).format("dddd DD MMMM YYYY HH:mm:ss")
+}
+
+function escapeHTML(text) {
+	return text.replace(/\&/g,"&amp;").replace(/\</g,"&lt;").replace(/\>/g,"&gt;");
+}
+
+function escapeRegExp(text) {
+	return text.replace(/[\/-[\]{}()*+?.,\\^$|#\s]/g, "\\$&")
+}
+
+function short(n){ 
+	return x => x.length > n ? x.slice(0,n) + "..." : x
+}
+
+function updateEach(x,n,callback){
+	return _.each( x, y => _.update( y, n, callback ) )
+}
+
+function updateFlow(x,ai,af){
+	return _.each( x, y => { for( let k of Object.keys(ai) ) _.update( y, ai[k], _.flow(af[k]) ) } )
+}
+
+function hexEncode(x){
+	return Buffer.from(x,"utf8").toString("hex")
+}
+
+function hexDecode(x){
+	return Buffer.from(x,"hex").toString("utf8")
+}
+
+function server(x,n){
+	const http = require("http")
+	const PORT = 8080
+	http.createServer(function (req, res) {
+		res.writeHead(200,{"content-type":`text/${n};charset=utf8`})
+		res.end(x)
+	}).listen(PORT)
+	console.log(`Running at port ${PORT}`)
+}
+
+// convert google timestamp to dayjs object
+
+function foo(x){
+
+	let convert_to_date = x => dayjs(Math.trunc(x/1000+Date.UTC(1601,0,1)))
+
+	let a = convert_to_date(x.time)
+	let b = dayjs()
+
+	let c = b.diff(a)
+	let d = dayjs.duration(c)
+
+	return d.format("Y [année] M [mois] D [jours] H [heures] m [minutes] s [secondes]")
+
+}
